@@ -1,16 +1,25 @@
+'use client'
+
+import { cn } from '@/lib/utils'
+import { Loader2 } from 'lucide-react'
+
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg'
   className?: string
 }
 
-export function LoadingSpinner({ size = 'md', className = '' }: LoadingSpinnerProps) {
-  const sizeClasses = {
-    sm: 'w-4 h-4',
-    md: 'w-8 h-8',
-    lg: 'w-12 h-12'
-  }
-
+export const LoadingSpinner = ({ size = 'md', className }: LoadingSpinnerProps) => {
   return (
-    <div className={`animate-spin rounded-full border-2 border-primary-200 border-t-primary-600 ${sizeClasses[size]} ${className}`} />
+    <Loader2
+      className={cn(
+        'animate-spin text-muted-foreground',
+        {
+          'h-4 w-4': size === 'sm',
+          'h-6 w-6': size === 'md',
+          'h-8 w-8': size === 'lg',
+        },
+        className
+      )}
+    />
   )
 }
